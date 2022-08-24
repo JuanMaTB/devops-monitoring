@@ -16,9 +16,9 @@ sudo mysql -uroot -p"$sql_pass" -e "create database zabbix character set utf8mb4
 sudo mysql -uroot -p"$sql_pass" -e "create user zabbix@localhost identified by '$sql_pass';"
 sudo mysql -uroot -p"$sql_pass" -e "grant all privileges on zabbix.* to zabbix@localhost;"
 
-zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p $sql_pass
+sudo zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p"$sql_pass" zabbix
 
-sed -i "s/# DBPassword=/DBPassword=$sql_pass/" /etc/zabbix/zabbix_server.conf
+sudo sed -i "s/# DBPassword=/DBPassword=$sql_pass/" /etc/zabbix/zabbix_server.conf
 
 sudo systemctl restart zabbix-server zabbix-agent apache2
 sudo systemctl enable zabbix-server zabbix-agent apache2

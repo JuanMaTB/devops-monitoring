@@ -25,10 +25,10 @@ sudo mysql -uroot -p"$sql_pass" -e "grant all privileges on zabbix_proxy.* to za
 sudo cat /usr/share/doc/zabbix-sql-scripts/mysql/proxy.sql | mysql -uzabbix -p"$sql_pass" zabbix_proxy
 
 sudo sed -i "s/# DBPassword=/DBPassword=$sql_pass/" /etc/zabbix/zabbix_proxy.conf
-echo "ConfigFrequency=100" >> /etc/zabbix/zabbix_proxy.conf
+sudo sed -i "s/# ConfigFrequency=300/ConfigFrequency=100/" /etc/zabbix/zabbix_proxy.conf
 read -p "Server IP:" server_ip
 read -p "Hostname:" hostname
-sudo sed -i "s/Server=127.0.0.1/Server=$sql_pass/" /etc/zabbix/zabbix_proxy.conf
+sudo sed -i "s/Server=127.0.0.1/Server=$server_ip/" /etc/zabbix/zabbix_proxy.conf
 sudo sed -i "s/Hostname=Zabbix proxy/Hostname=$hostname/" /etc/zabbix/zabbix_proxy.conf
 
 sudo systemctl restart zabbix-proxy

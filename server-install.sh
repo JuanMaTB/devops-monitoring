@@ -12,9 +12,9 @@ sudo apt update
 
 sudo apt install -y zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
 read -p "MySQL password: " sql_pass
-sudo mysql -uroot -p $sql_pass -e "create database zabbix character set utf8mb4 collate utf8mb4_bin;"
-sudo mysql -uroot -p $sql_pass -e "create user zabbix@localhost identified by '$sql_pass';"
-sudo mysql -uroot -p $sql_pass -e "grant all privileges on zabbix.* to zabbix@localhost;"
+sudo mysql -uroot -p"'$sql_pass'" -e "create database zabbix character set utf8mb4 collate utf8mb4_bin;"
+sudo mysql -uroot -p"'$sql_pass'" -e "create user zabbix@localhost identified by '$sql_pass';"
+sudo mysql -uroot -p"'$sql_pass'" -e "grant all privileges on zabbix.* to zabbix@localhost;"
 
 zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p $sql_pass
 

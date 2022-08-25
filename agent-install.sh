@@ -8,3 +8,4 @@ sudo sed -i "s/ServerActive=127.0.0.1/ServerActive=$server_ip/" /etc/zabbix/zabb
 
 sudo systemctl start zabbix-agent
 sudo systemctl enable zabbix-agent
+sudo systemctl restart zabbix-agent
